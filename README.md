@@ -1,8 +1,31 @@
+## Foked form: https://github.com/GustavZ/realtime_object_detection
+## Added KCF tracker to improve detection speed (from 25FPS to 35 FPS)
+
+## demo video
+Detection ussing only SSD: https://youtu.be/JLKqoV4vETY
+
+Combine SSD and KCF: https://youtu.be/6pn6qUNScaU
+
 # realtime_object_detection
 Realtime object detection based on [Tensorflow's Object Detection API](https://github.com/tensorflow/models/tree/master/research/object_detection) with an extreme Focus on Performance. <br />
 Specialized for `ssd_mobilenet` models.
 <br />
 <br />
+## Getting Started:  
+- create a copy of `config.sample.yml` called `config.yml`
+- Optional: Change Parameters in `config.yml` to load other models or to modify input params.
+- For example: If you are not interested in visualization: set `visualize` to `False`. <br />
+- run `image_detection.py` for single test image detection
+- run `object_detection.py` for realtime object detection
+- Enjoy!
+- To run the detection using combination of SSD and KCF tracker
+    - Currently, Only support for single thread ('split_model = True' have not supported the combination yet)
+    - change parametter 'use_kcf' in config.yml
+    - build kcf lib: ./makefile.sh
+    - run object_detection_kcf.py
+    - Enjoy!
+<br />
+
 ## About the Project
 The Idea was to create a realtime capable object detection pipeline on various machines. <br />
 Plug and play, ready to use without deep previous knowledge.<br /> <br />
@@ -21,14 +44,6 @@ Works only for `ssd_mobilenet` models but results in significant performance inc
 - **Results: Overall up to x10 Performance Increase** depending on the config and the running system
 <br />
 
-## Getting Started:  
-- create a copy of `config.sample.yml` called `config.yml`
-- Optional: Change Parameters in `config.yml` to load other models or to modify input params.
-- For example: If you are not interested in visualization: set `visualize` to `False`. <br />
-- run `image_detection.py` for single test image detection
-- run `object_detection.py` for realtime object detection
-- Enjoy!
-<br />
 
 ## My Setup:
 - Ubuntu 16.04
@@ -42,9 +57,3 @@ Works only for `ssd_mobilenet` models but results in significant performance inc
 - Nvidia Jetson Tx2 with Tegra 8GB:                           **30fps | 33 fps**
  <br />
 
-## Further Work:
-- [test_models](https://github.com/GustavZ/test_models): A repo for models i am currently working on for benchmark tests
-- [deeptraining_hands](https://github.com/GustavZ/deeptraining_hands): A repo for setting up the [ego](http://vision.soic.indiana.edu/projects/egohands/)- and [oxford](http://www.robots.ox.ac.uk/~vgg/data/hands/) hands-datasets.<br />
-It also contains several scripts to convert various annotation formats to be able to train Networks on different deep learning frameworks <br />
-currently supports `.xml`, `.mat`, `.csv`, `.record`, `.txt` annotations
-- [tf_for_od_api](https://github.com/GustavZ/yolo_for_tf_od_api): A repo to be able to include Yolo V2 in tf's object detection api
